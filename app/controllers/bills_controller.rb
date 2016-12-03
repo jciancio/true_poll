@@ -3,13 +3,14 @@ class BillsController < ApplicationController
 
   # GET /bills
   def index
-    @bills = Bill.all
+    @bills = Bill.all_with_votes
 
     render json: @bills
   end
 
   # GET /bills/1
   def show
+    @bill.calculate_votes
     render json: @bill
   end
 
