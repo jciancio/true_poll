@@ -14,7 +14,8 @@ class VotesController < ApplicationController
     @vote = Vote.new(vote_params)
 
     if @vote.save
-      render json: @vote, status: :created, location: @vote
+      @vote.bill.calculate_votes
+      render json: @vote.bill, status: :created, location: @vote
     else
       render json: @vote.errors, status: :unprocessable_entity
     end
